@@ -55,25 +55,7 @@
       50%      { opacity: 1;  transform: scale(1.6); }
     }
 
-    /* FOTO CIRCULAR */
-    .foto-marco {
-      display: inline-block;
-      border-radius: 50%;
-      padding: 5px;
-      background: linear-gradient(135deg, var(--azul-cielo), var(--azul-medio), var(--azul-cielo));
-      box-shadow: 0 0 30px rgba(127,179,232,.7);
-      margin-bottom: 1.2rem;
-    }
-    .foto-marco img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid rgba(11,42,74,.9);
-    }
-
-    /* FOTO RECTANGULAR (segunda imagen) */
+    /* FOTO RECTANGULAR */
     .foto-rect {
       display: inline-block;
       margin-top: 2.2rem;
@@ -129,25 +111,21 @@
     .contenido-bienvenida::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
     .contenido-bienvenida::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
-    .contenido-bienvenida .foto-marco {
-      width: clamp(150px, 40vw, 220px);
-      height: clamp(150px, 40vw, 220px);
-    }
-
     .contenido-bienvenida h1 {
       font-family: 'Great Vibes', cursive;
       font-weight: 400;
-      font-size: clamp(2.6rem, 9vw, 4.5rem);
+      font-size: clamp(3.5rem, 12vw, 6rem);
       margin: .2rem 0 .5rem;
       color: var(--blanco);
     }
     .contenido-bienvenida p {
       font-family: 'Cinzel', serif;
-      letter-spacing: .3em;
+      letter-spacing: .25em;
       text-transform: uppercase;
       color: var(--azul-claro);
-      font-size: clamp(.8rem, 2.5vw, 1rem);
+      font-size: clamp(1rem, 3.5vw, 1.3rem);
       margin: 0 0 2rem;
+      line-height: 1.5;
     }
     #boton-abrir {
       margin-top: 1rem;
@@ -202,13 +180,6 @@
     .marco-portada::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
     .marco-portada::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
-    .marco-portada .foto-marco {
-      width: clamp(160px, 42vw, 230px);
-      height: clamp(160px, 42vw, 230px);
-      margin-top: 0;
-      margin-bottom: 1.6rem;
-    }
-
     .sobre {
       letter-spacing: .5em;
       font-size: .85rem;
@@ -235,7 +206,7 @@
     h1.nombre {
       font-family: 'Great Vibes', cursive;
       font-weight: 400;
-      font-size: clamp(3rem, 10vw, 6rem);
+      font-size: clamp(3.5rem, 12vw, 7rem);
       margin: .4rem 0 1rem;
       color: var(--blanco);
     }
@@ -329,15 +300,17 @@
     section h2 {
       font-family: 'Great Vibes', cursive;
       font-weight: 400;
-      font-size: clamp(2.2rem, 7vw, 3.6rem);
+      font-size: clamp(2.5rem, 8vw, 4rem);
       color: var(--azul-profundo);
       margin: 0 0 .5rem;
     }
+
+    /* SUBTÍTULOS MÁS GRANDES Y LLAMATIVOS */
     .subtitulo {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.05rem, 3.8vw, 1.55rem);
-      font-weight: 600;
-      letter-spacing: .22em;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: .25em;
       text-transform: uppercase;
       color: var(--azul-medio);
       margin: 0 0 2rem;
@@ -370,10 +343,11 @@
     .padres::before { left: 30px; }
     .padres::after  { right: 30px; }
 
+    /* TEXTOS DE LOS PADRES MÁS GRANDES */
     .padres .rol {
       font-family: 'Cinzel', serif;
-      font-size: .85rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 700;
       letter-spacing: .35em;
       text-transform: uppercase;
       color: var(--azul-medio);
@@ -381,13 +355,23 @@
     }
     .padres .nombre-padre {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.3rem, 4.5vw, 1.7rem);
-      font-weight: 600;
+      font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+      font-weight: 700;
       color: var(--azul-profundo);
-      margin: 0 0 1.5rem;
+      margin: 0 0 1.8rem;
       line-height: 1.3;
     }
-    .padres .nombre-padre:last-child { margin-bottom: 0; }
+    
+    .padres .familia {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--azul-medio);
+      margin-top: 2rem;
+      margin-bottom: 0;
+    }
 
     .detalles {
       display: grid;
@@ -415,8 +399,8 @@
     }
     .detalle-card h3 {
       font-family: 'Cinzel', serif;
-      font-size: .8rem;
-      font-weight: 600;
+      font-size: .9rem;
+      font-weight: 700;
       letter-spacing: .3em;
       text-transform: uppercase;
       color: var(--azul-medio);
@@ -424,14 +408,14 @@
     }
     .detalle-card .lugar {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--azul-profundo);
       margin: .2rem 0 .6rem;
       line-height: 1.2;
     }
     .detalle-card .direccion {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--texto);
       line-height: 1.5;
       margin: 0 0 1rem;
@@ -471,16 +455,16 @@
     .countdown .num {
       display: block;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.6rem;
-      font-weight: 600;
+      font-size: 2.8rem;
+      font-weight: 700;
       color: var(--azul-claro);
       line-height: 1;
     }
     .countdown .lbl {
       display: block;
       font-family: 'Cinzel', serif;
-      font-size: .7rem;
-      font-weight: 600;
+      font-size: .8rem;
+      font-weight: 700;
       letter-spacing: .25em;
       text-transform: uppercase;
       color: var(--azul-cielo);
@@ -510,8 +494,26 @@
     .vestimenta::before { left: 30px; }
     .vestimenta::after  { right: 30px; }
 
-    .vestimenta p { font-size: 1.2rem; line-height: 1.7; margin: .5rem 0; }
+    /* TEXTO DE VESTIMENTA MÁS GRANDE */
+    .vestimenta p { 
+      font-size: clamp(1.4rem, 4.5vw, 1.8rem); 
+      line-height: 1.6; 
+      margin: .5rem 0; 
+      font-weight: 600;
+    }
     .vestimenta strong { color: var(--azul-medio); }
+
+    /* NUEVO ESTILO PARA EL TEXTO DE CONFIRMACIÓN */
+    .texto-rsvp {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+      text-transform: none;
+      letter-spacing: normal;
+      font-weight: 600;
+      color: var(--texto);
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
 
     @keyframes aparecer {
       from { opacity: 0; transform: scale(.96); }
@@ -599,13 +601,11 @@
 
   <div class="estrellas" id="estrellas" aria-hidden="true"></div>
 
+  <!-- PANTALLA DE BIENVENIDA -->
   <div id="pantalla-bienvenida">
     <div class="contenido-bienvenida">
-      <div class="foto-marco">
-        <img src="dinorah.png" alt="Dinorah" onerror="this.parentElement.style.display='none'">
-      </div>
       <h1>Dinorah</h1>
-      <p>26 · Diciembre · 2026</p>
+      <p>TE INVITO A FESTEJAR MIS XV</p>
       <button id="boton-abrir" type="button">Abrir Invitación</button>
     </div>
   </div>
@@ -625,11 +625,6 @@
   <header class="portada">
     <div class="marco-portada">
 
-      <!-- PRIMERA IMAGEN (circular, arriba) -->
-      <div class="foto-marco">
-        <img src="dinorah.png" alt="Dinorah" onerror="this.parentElement.style.display='none'">
-      </div>
-
       <p class="sobre">Mis XV Años</p>
       <div class="monograma">XV</div>
       <h1 class="nombre">Dinorah</h1>
@@ -646,17 +641,23 @@
     </div>
   </header>
 
+  <!-- ===================== PADRES ===================== -->
   <section class="revelar">
     <h2>Con la Bendición de Dios</h2>
-    <p class="subtitulo">Y de mis padres</p>
+    <p class="subtitulo" style="margin-bottom: 1.5rem;">De mis padres</p>
+    
     <div class="padres">
       <p class="rol">Sra.</p>
       <p class="nombre-padre">Karla Dinorah Calzadas Herrera</p>
+      
       <p class="rol">Sr.</p>
       <p class="nombre-padre">Julio Victor Galindo Rojas</p>
+      
+      <p class="familia">Y de toda la familia</p>
     </div>
   </section>
 
+  <!-- ===================== DETALLES ===================== -->
   <section id="detalles" class="revelar">
     <h2>Detalles</h2>
     <p class="subtitulo">Ceremonia y recepción</p>
@@ -694,6 +695,7 @@
     </div>
   </section>
 
+  <!-- ===================== CUENTA REGRESIVA ===================== -->
   <section class="seccion-timer revelar">
     <h2>Cuenta regresiva</h2>
     <p class="subtitulo">Faltan para el gran día</p>
@@ -705,6 +707,7 @@
     </div>
   </section>
 
+  <!-- ===================== VESTIMENTA ===================== -->
   <section class="revelar">
     <h2>Código de Vestimenta</h2>
     <p class="subtitulo">Formal</p>
@@ -713,9 +716,15 @@
     </div>
   </section>
 
+  <!-- ===================== RSVP ===================== -->
   <section class="revelar">
     <h2>Confirma tu asistencia</h2>
-    <p class="subtitulo">Antes del 4 de diciembre</p>
+    
+    <!-- TEXTO DE CONFIRMACIÓN MÁS GRANDE -->
+    <p class="texto-rsvp">
+      Agradecemos que confirmes tu asistencia antes del día 14 de diciembre.
+    </p>
+
     <a class="boton solido" href="https://forms.google.com/" target="_blank" rel="noopener">
       Confirmar asistencia
     </a>

@@ -1,0 +1,863 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XV Años · Dinorah</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --azul-noche: #06172e;
+      --azul-profundo: #0b2a4a;
+      --azul-medio: #1f5f99;
+      --azul-cielo: #7fb3e8;
+      --azul-claro: #dcecff;
+      --azul-suave: #f4f9ff;
+      --blanco: #ffffff;
+      --texto: #102a43;
+      --dorado: #c9a96a;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--azul-suave);
+      color: var(--texto);
+      text-align: center;
+      overflow-x: hidden;
+    }
+    body.bloqueado { overflow: hidden; }
+
+    .estrellas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .estrella {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: var(--azul-cielo);
+      border-radius: 50%;
+      box-shadow: 0 0 8px 2px rgba(127,179,232,.7);
+      animation: titilar 3s infinite ease-in-out;
+    }
+    @keyframes titilar {
+      0%, 100% { opacity: .2; transform: scale(1); }
+      50%      { opacity: 1;  transform: scale(1.6); }
+    }
+
+    /* FOTO RECTANGULAR */
+    .foto-rect {
+      display: inline-block;
+      margin-top: 2.2rem;
+      padding: 6px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--azul-cielo), var(--azul-medio), var(--azul-cielo));
+      box-shadow: 0 0 30px rgba(127,179,232,.6);
+      max-width: 100%;
+    }
+    .foto-rect img {
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      border-radius: 14px;
+      border: 3px solid rgba(11,42,74,.9);
+      object-fit: cover;
+    }
+
+    /* PANTALLA DE BIENVENIDA */
+    #pantalla-bienvenida {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(127,179,232,.35), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(31,95,153,.35), transparent 60%),
+        linear-gradient(160deg, var(--azul-noche), var(--azul-profundo) 60%, var(--azul-medio));
+      color: var(--blanco);
+      text-align: center;
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+    #pantalla-bienvenida.oculto {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .contenido-bienvenida {
+      max-width: 640px;
+      padding: 3rem 2rem;
+      border: 1px solid rgba(255,255,255,.35);
+      position: relative;
+    }
+    .contenido-bienvenida::before,
+    .contenido-bienvenida::after {
+      content: "";
+      position: absolute;
+      width: 40px; height: 40px;
+      border: 1px solid var(--azul-cielo);
+    }
+    .contenido-bienvenida::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+    .contenido-bienvenida::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+    .contenido-bienvenida h1 {
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      margin: .2rem 0 .5rem;
+      color: var(--blanco);
+    }
+    .contenido-bienvenida p {
+      font-family: 'Cinzel', serif;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--azul-claro);
+      font-size: clamp(1rem, 3.5vw, 1.3rem);
+      margin: 0 0 2rem;
+      line-height: 1.5;
+    }
+    #boton-abrir {
+      margin-top: 1rem;
+      padding: 1rem 2.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--blanco);
+      border: 1px solid var(--azul-cielo);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .35s ease;
+    }
+    #boton-abrir:hover {
+      background: var(--azul-cielo);
+      color: var(--azul-noche);
+      box-shadow: 0 0 24px rgba(127,179,232,.8);
+    }
+
+    /* PORTADA */
+    header.portada {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(127,179,232,.35), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(31,95,153,.35), transparent 60%),
+        linear-gradient(160deg, var(--azul-noche), var(--azul-profundo) 60%, var(--azul-medio));
+      color: var(--blanco);
+    }
+
+    .marco-portada {
+      border: 1px solid rgba(255,255,255,.35);
+      padding: 3rem 2rem;
+      max-width: 720px;
+      position: relative;
+      animation: aparecer 1.6s ease-out both;
+    }
+    .marco-portada::before,
+    .marco-portada::after {
+      content: "";
+      position: absolute;
+      width: 40px; height: 40px;
+      border: 1px solid var(--azul-cielo);
+    }
+    .marco-portada::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+    .marco-portada::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+    .sobre {
+      letter-spacing: .5em;
+      font-size: .85rem;
+      text-transform: uppercase;
+      color: var(--azul-claro);
+      margin-bottom: 1rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+    }
+
+    .monograma {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(4rem, 14vw, 8rem);
+      line-height: 1;
+      color: var(--blanco);
+      text-shadow: 0 0 24px rgba(127,179,232,.9), 0 0 60px rgba(31,95,153,.6);
+      animation: brillo 4s infinite ease-in-out;
+    }
+    @keyframes brillo {
+      0%, 100% { text-shadow: 0 0 24px rgba(127,179,232,.9), 0 0 60px rgba(31,95,153,.6); }
+      50%      { text-shadow: 0 0 34px rgba(200,220,255,1),  0 0 90px rgba(127,179,232,.9); }
+    }
+
+    h1.nombre {
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+      font-size: clamp(3.5rem, 12vw, 7rem);
+      margin: .4rem 0 1rem;
+      color: var(--blanco);
+    }
+
+    .linea-decorativa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .8rem;
+      margin: 1.2rem auto;
+      color: var(--azul-cielo);
+      max-width: 320px;
+    }
+    .linea-decorativa::before,
+    .linea-decorativa::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--azul-cielo), transparent);
+    }
+    .diamante {
+      width: 8px; height: 8px;
+      background: var(--azul-cielo);
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px var(--azul-cielo);
+    }
+
+    .fecha-portada {
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      letter-spacing: .3em;
+      color: var(--azul-claro);
+      text-transform: uppercase;
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+    }
+    .hora-portada {
+      font-size: clamp(.85rem, 2.6vw, 1rem);
+      letter-spacing: .2em;
+      color: var(--azul-cielo);
+      text-transform: uppercase;
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      margin-top: .6rem;
+    }
+
+    .boton {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2.2rem;
+      background: transparent;
+      color: var(--blanco);
+      text-decoration: none;
+      border: 1px solid var(--azul-cielo);
+      border-radius: 999px;
+      font-family: 'Cinzel', serif;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      font-size: .8rem;
+      font-weight: 600;
+      transition: all .35s ease;
+      cursor: pointer;
+    }
+    .boton:hover {
+      background: var(--azul-cielo);
+      color: var(--azul-noche);
+      box-shadow: 0 0 24px rgba(127,179,232,.8);
+    }
+    .boton.solido {
+      background: var(--azul-medio);
+      border-color: var(--azul-medio);
+      color: var(--blanco);
+    }
+    .boton.solido:hover {
+      background: var(--azul-profundo);
+      border-color: var(--azul-profundo);
+      box-shadow: 0 0 24px rgba(31,95,153,.7);
+    }
+    .boton.mini {
+      margin-top: .8rem;
+      padding: .65rem 1.4rem;
+      font-size: .7rem;
+    }
+
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 1.5rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section h2 {
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      color: var(--azul-profundo);
+      margin: 0 0 .5rem;
+    }
+
+    /* SUBTÍTULOS MÁS GRANDES Y LLAMATIVOS */
+    .subtitulo {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--azul-medio);
+      margin: 0 0 2rem;
+      line-height: 1.4;
+    }
+
+    .revelar { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s ease; }
+    .revelar.visible { opacity: 1; transform: translateY(0); }
+
+    .padres {
+      background: var(--blanco);
+      border: 1px solid var(--azul-claro);
+      border-radius: 1.5rem;
+      padding: 3rem 1.5rem;
+      max-width: 640px;
+      margin: 0 auto;
+      box-shadow: 0 8px 30px rgba(11,42,74,.08);
+      position: relative;
+    }
+    .padres::before,
+    .padres::after {
+      content: "✦";
+      color: var(--dorado);
+      font-size: 1.4rem;
+      position: absolute;
+      top: -14px;
+      background: var(--azul-suave);
+      padding: 0 .6rem;
+    }
+    .padres::before { left: 30px; }
+    .padres::after  { right: 30px; }
+
+    /* TEXTOS DE LOS PADRES MÁS GRANDES */
+    .padres .rol {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--azul-medio);
+      margin-bottom: .4rem;
+    }
+    .padres .nombre-padre {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--azul-profundo);
+      margin: 0 0 1.8rem;
+      line-height: 1.3;
+    }
+    
+    .padres .familia {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--azul-medio);
+      margin-top: 2rem;
+      margin-bottom: 0;
+    }
+
+    .detalles {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) {
+      .detalles { grid-template-columns: repeat(2, 1fr); }
+    }
+    .detalle-card {
+      background: var(--blanco);
+      border: 1px solid var(--azul-claro);
+      border-radius: 1.2rem;
+      padding: 2.2rem 1.5rem;
+      box-shadow: 0 8px 30px rgba(11,42,74,.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .detalle-card .icono {
+      font-size: 1.8rem;
+      color: var(--azul-medio);
+      margin-bottom: .8rem;
+    }
+    .detalle-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--azul-medio);
+      margin: 0 0 .6rem;
+    }
+    .detalle-card .lugar {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--azul-profundo);
+      margin: .2rem 0 .6rem;
+      line-height: 1.2;
+    }
+    .detalle-card .direccion {
+      font-size: 1.1rem;
+      color: var(--texto);
+      line-height: 1.5;
+      margin: 0 0 1rem;
+    }
+
+    .seccion-timer {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(127,179,232,.25), transparent 70%),
+        linear-gradient(180deg, var(--azul-profundo), var(--azul-noche));
+      color: var(--blanco);
+      max-width: none;
+      padding: 5rem 1.5rem;
+    }
+    .seccion-timer h2 { color: var(--blanco); }
+    .seccion-timer .subtitulo { color: var(--azul-cielo); }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .countdown .unidad {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(127,179,232,.4);
+      padding: 1.5rem 1rem;
+      border-radius: 1rem;
+      min-width: 90px;
+      backdrop-filter: blur(4px);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .countdown .unidad:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 30px rgba(127,179,232,.5);
+    }
+    .countdown .num {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--azul-claro);
+      line-height: 1;
+    }
+    .countdown .lbl {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--azul-cielo);
+      margin-top: .5rem;
+    }
+
+    .vestimenta {
+      background: var(--blanco);
+      border: 2px solid var(--azul-claro);
+      border-radius: 1.5rem;
+      padding: 2.5rem 1.5rem;
+      margin: 0 auto;
+      max-width: 640px;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(11,42,74,.08);
+    }
+    .vestimenta::before,
+    .vestimenta::after {
+      content: "✦";
+      color: var(--dorado);
+      font-size: 1.4rem;
+      position: absolute;
+      top: -14px;
+      background: var(--azul-suave);
+      padding: 0 .6rem;
+    }
+    .vestimenta::before { left: 30px; }
+    .vestimenta::after  { right: 30px; }
+
+    /* TEXTO DE VESTIMENTA MÁS GRANDE */
+    .vestimenta p { 
+      font-size: clamp(1.4rem, 4.5vw, 1.8rem); 
+      line-height: 1.6; 
+      margin: .5rem 0; 
+      font-weight: 600;
+    }
+    .vestimenta strong { color: var(--azul-medio); }
+
+    /* NUEVO ESTILO PARA EL TEXTO DE CONFIRMACIÓN */
+    .texto-rsvp {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+      text-transform: none;
+      letter-spacing: normal;
+      font-weight: 600;
+      color: var(--texto);
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(.96); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    #boton-musica {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 9999;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 1px solid var(--azul-cielo);
+      background: rgba(11,42,74,.85);
+      color: var(--azul-claro);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 20px rgba(127,179,232,.5);
+      transition: all .3s ease;
+      animation: pulso-musica 2.4s infinite ease-in-out;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #boton-musica.activo {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #boton-musica:hover {
+      background: var(--azul-cielo);
+      color: var(--azul-noche);
+      transform: scale(1.08);
+    }
+    #boton-musica.sonando {
+      animation: girar-musica 6s linear infinite;
+      background: var(--azul-medio);
+      color: var(--blanco);
+    }
+    @keyframes pulso-musica {
+      0%, 100% { box-shadow: 0 0 20px rgba(127,179,232,.5); }
+      50%      { box-shadow: 0 0 34px rgba(127,179,232,.9); }
+    }
+    @keyframes girar-musica {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    #aviso-musica {
+      position: fixed;
+      left: 50%;
+      bottom: 90px;
+      transform: translateX(-50%);
+      z-index: 100001;
+      max-width: 90vw;
+      padding: 1rem 1.3rem;
+      background: #ffefef;
+      color: #7a1f1f;
+      border: 1px solid #e5a5a5;
+      border-radius: 12px;
+      font-family: sans-serif;
+      font-size: .85rem;
+      line-height: 1.4;
+      text-align: left;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      display: none;
+    }
+    #aviso-musica.visible { display: block; }
+    #aviso-musica button {
+      margin-top: .6rem;
+      background: #7a1f1f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: .4rem .8rem;
+      font-size: .8rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bloqueado">
+
+  <div class="estrellas" id="estrellas" aria-hidden="true"></div>
+
+  <!-- PANTALLA DE BIENVENIDA -->
+  <div id="pantalla-bienvenida">
+    <div class="contenido-bienvenida">
+      <h1>Dinorah</h1>
+      <p>TE INVITO A FESTEJAR MIS XV</p>
+      <button id="boton-abrir" type="button">Abrir Invitación</button>
+    </div>
+  </div>
+
+  <button id="boton-musica" type="button" aria-label="Reproducir música">♪</button>
+  <audio id="audio-musica" loop preload="auto"></audio>
+
+  <div id="aviso-musica">
+    <strong>No se pudo reproducir la canción.</strong>
+    <div id="aviso-musica-texto" style="margin-top:.4rem;"></div>
+    <button type="button" onclick="document.getElementById('aviso-musica').classList.remove('visible')">
+      Cerrar
+    </button>
+  </div>
+
+  <!-- ===================== PORTADA ===================== -->
+  <header class="portada">
+    <div class="marco-portada">
+
+      <p class="sobre">Mis XV Años</p>
+      <div class="monograma">XV</div>
+      <h1 class="nombre">Dinorah</h1>
+      <div class="linea-decorativa"><span class="diamante"></span></div>
+      <p class="fecha-portada">Sábado 26 · Diciembre · 2026</p>
+      <p class="hora-portada">Misa 4:00 p.m. · Recepción 6:00 p.m.</p>
+      <a class="boton" href="#detalles">Ver detalles</a>
+
+      <!-- SEGUNDA IMAGEN (rectangular, debajo del botón) -->
+      <div class="foto-rect">
+        <img src="dinorah2.png" alt="Dinorah" onerror="this.parentElement.style.display='none'">
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ===================== PADRES ===================== -->
+  <section class="revelar">
+    <h2>Con la Bendición de Dios</h2>
+    <p class="subtitulo" style="margin-bottom: 1.5rem;">De mis padres</p>
+    
+    <div class="padres">
+      <p class="rol">Sra.</p>
+      <p class="nombre-padre">Karla Dinorah Calzadas Herrera</p>
+      
+      <p class="rol">Sr.</p>
+      <p class="nombre-padre">Julio Victor Galindo Rojas</p>
+      
+      <p class="familia">Y de toda la familia</p>
+    </div>
+  </section>
+
+  <!-- ===================== DETALLES ===================== -->
+  <section id="detalles" class="revelar">
+    <h2>Detalles</h2>
+    <p class="subtitulo">Ceremonia y recepción</p>
+    <div class="detalles">
+      <!-- MISA -->
+      <div class="detalle-card">
+        <div>
+          <div class="icono">✦</div>
+          <h3>Misa · 4:00 p.m.</h3>
+          <p class="lugar">Parroquia María Inmaculada</p>
+          <p class="direccion">
+            Calle 16 de Septiembre No. 802,<br>
+            Col. Tajín, C.P. 93330,<br>
+            Poza Rica, Ver.
+          </p>
+        </div>
+        <a class="boton solido mini"
+           href="https://www.google.com/maps/search/?api=1&query=Parroquia+Mar%C3%ADa+Inmaculada+16+de+Septiembre+802+Poza+Rica+Veracruz"
+           target="_blank" rel="noopener">Ver mapa</a>
+      </div>
+
+      <!-- RECEPCIÓN (NUEVA DIRECCIÓN) -->
+      <div class="detalle-card">
+        <div>
+          <div class="icono">✧</div>
+          <h3>Recepción · 6:00 p.m.</h3>
+          <p class="lugar">Salón de Eventos Black Day</p>
+          <p class="direccion">
+            Emiliano Zapata #3,<br>
+            Col. Plan de Ayala, C.P. 92912,<br>
+            Tihuatlán, Ver.
+          </p>
+        </div>
+        <a class="boton solido mini"
+           href="https://www.google.com/maps/search/?api=1&query=Sal%C3%B3n+de+Eventos+Black+Day+Emiliano+Zapata+3+Plan+de+Ayala+Tihuatl%C3%A1n"
+           target="_blank" rel="noopener">Ver mapa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CUENTA REGRESIVA ===================== -->
+  <section class="seccion-timer revelar">
+    <h2>Cuenta regresiva</h2>
+    <p class="subtitulo">Faltan para el gran día</p>
+    <div class="countdown" id="countdown">
+      <div class="unidad"><span class="num" id="dias">0</span><span class="lbl">Días</span></div>
+      <div class="unidad"><span class="num" id="horas">0</span><span class="lbl">Horas</span></div>
+      <div class="unidad"><span class="num" id="minutos">0</span><span class="lbl">Minutos</span></div>
+      <div class="unidad"><span class="num" id="segundos">0</span><span class="lbl">Segundos</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== VESTIMENTA ===================== -->
+  <section class="revelar">
+    <h2>Código de Vestimenta</h2>
+    <p class="subtitulo">Formal</p>
+    <div class="vestimenta">
+      <p>El color <strong>azul marino está reservado para la quinceañera</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ===================== RSVP ===================== -->
+  <section class="revelar">
+    <h2>Confirma tu asistencia</h2>
+    
+    <!-- TEXTO DE CONFIRMACIÓN MÁS GRANDE -->
+    <p class="texto-rsvp">
+      Agradecemos que confirmes tu asistencia antes del día 14 de diciembre.
+    </p>
+
+    <a class="boton solido" href="https://forms.google.com/" target="_blank" rel="noopener">
+      Confirmar asistencia
+    </a>
+  </section>
+
+  <script>
+    const CANCION_URL = "cancion.mp3";
+
+    const audio      = document.getElementById("audio-musica");
+    const botonMus   = document.getElementById("boton-musica");
+    const aviso      = document.getElementById("aviso-musica");
+    const avisoTexto = document.getElementById("aviso-musica-texto");
+    const pantalla   = document.getElementById("pantalla-bienvenida");
+    const botonAbrir = document.getElementById("boton-abrir");
+    const body       = document.body;
+
+    function mostrarAviso(msg) {
+      avisoTexto.innerHTML = msg;
+      aviso.classList.add("visible");
+    }
+
+    audio.src = CANCION_URL;
+    audio.volume = 0.6;
+
+    audio.addEventListener("error", () => {
+      const err = audio.error;
+      let pista = "No se encontró el archivo o el navegador no lo puede leer.";
+      if (err) {
+        if (err.code === 1) pista = "Reproducción cancelada.";
+        if (err.code === 2) pista = "Error de red. Revisa que el MP3 esté en la misma carpeta que el HTML.";
+        if (err.code === 3) pista = "El archivo está corrupto o el formato no es compatible.";
+        if (err.code === 4) pista = "Formato no soportado. Usa un MP3 válido.";
+      }
+      mostrarAviso(
+        "<strong>No se pudo cargar la canción.</strong><br>" +
+        pista + "<br><br>" +
+        "Ruta que intentó cargar:<br><code style='font-size:.75rem;word-break:break-all'>" +
+        CANCION_URL + "</code>"
+      );
+    });
+
+    botonAbrir.addEventListener("click", async () => {
+      try {
+        await audio.play();
+        botonMus.textContent = "❚❚";
+        botonMus.classList.add("sonando");
+      } catch (err) {
+        console.warn("No se pudo iniciar la música:", err);
+      }
+      pantalla.classList.add("oculto");
+      body.classList.remove("bloqueado");
+      botonMus.classList.add("activo");
+      if (typeof actualizarCuenta === "function") actualizarCuenta();
+    });
+
+    botonMus.addEventListener("click", async () => {
+      try {
+        if (audio.paused) {
+          await audio.play();
+          botonMus.textContent = "❚❚";
+          botonMus.classList.add("sonando");
+          aviso.classList.remove("visible");
+        } else {
+          audio.pause();
+          botonMus.textContent = "♪";
+          botonMus.classList.remove("sonando");
+        }
+      } catch (err) {
+        console.error("No se pudo reproducir:", err);
+        mostrarAviso(
+          "<strong>El navegador bloqueó la reproducción.</strong><br>" +
+          "Detalle: " + (err.message || err.name || err) + "<br><br>" +
+          "Revisa que:<br>" +
+          "1) <code>CANCION_URL</code> apunte a un MP3 real.<br>" +
+          "2) El MP3 esté en la misma carpeta que el HTML.<br>" +
+          "3) El archivo no esté corrupto."
+        );
+      }
+    });
+
+    (function crearEstrellas() {
+      const contenedor = document.getElementById("estrellas");
+      for (let i = 0; i < 60; i++) {
+        const s = document.createElement("span");
+        s.className = "estrella";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.top  = Math.random() * 100 + "vh";
+        s.style.animationDelay    = (Math.random() * 3) + "s";
+        s.style.animationDuration = (2 + Math.random() * 3) + "s";
+        s.style.opacity = 0.2 + Math.random() * 0.8;
+        contenedor.appendChild(s);
+      }
+    })();
+
+    const fechaEvento = new Date("2026-12-26T16:00:00-06:00").getTime();
+    const $dias     = document.getElementById("dias");
+    const $horas    = document.getElementById("horas");
+    const $minutos  = document.getElementById("minutos");
+    const $segundos = document.getElementById("segundos");
+    let intervalo = null;
+
+    function actualizarCuenta() {
+      const diferencia = fechaEvento - Date.now();
+      if (diferencia <= 0) {
+        document.getElementById("countdown").innerHTML =
+          "<p style='font-family:Great Vibes,cursive;font-size:2.2rem;color:#dcecff;'>¡Llegó el gran día!</p>";
+        if (intervalo) clearInterval(intervalo);
+        return;
+      }
+      const seg = Math.floor(diferencia / 1000);
+      $dias.textContent     = Math.floor(seg / 86400);
+      $horas.textContent    = Math.floor((seg % 86400) / 3600);
+      $minutos.textContent  = Math.floor((seg % 3600) / 60);
+      $segundos.textContent = seg % 60;
+    }
+    actualizarCuenta();
+    intervalo = setInterval(actualizarCuenta, 1000);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) actualizarCuenta();
+    });
+
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          observador.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".revelar").forEach((el) => observador.observe(el));
+  </script>
+</body>
+</html>
